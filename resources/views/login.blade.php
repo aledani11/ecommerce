@@ -35,11 +35,15 @@
         #login a:nth-of-type(1){
             margin-bottom:1.5rem!important;
         }*/
+        #form_login{
+            margin-top:9rem;
+            margin-bottom:3.5rem;
+        }
 @endsection
 
 @section('content')
 
-    <form action="#" method="post">
+    <form action="#" method="post" id="form_login">
         <div class="container col-md-4">
             <div class="row">
 
@@ -52,16 +56,16 @@
                     </div>
 
                     <div class="col-md-12 mb-3">
-                        <label for="state">Province</label>
-                        <input type="text" class="form-control" id="state" value="">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" class="form-control" id="email" value="">
                     </div>
                     <div class="col-md-12 mb-4">
-                        <label for="email_address">Email Address</label>
-                        <input type="email" class="form-control" id="email_address" value="">
+                        <label for="pass">Contraseña</label>
+                        <input type="password" class="form-control" id="pass" value="">
                     </div>
 
                     <div class="col-md-12 mb-2">
-                        <a href="#" class="btn essence-btn">Place Order</a>
+                        <a href="#" class="btn essence-btn">Iniciar Sesión</a>
                     </div>
 
                     <div class="col-md-12 mb-2">
@@ -69,7 +73,7 @@
                     </div>
 
                     <div class="col-md-12 mb-2">
-                        <a href="#" class="link_login">Registrarse</a>
+                        <a href="{{ route('register') }}" class="link_login">Registrarse</a>
                     </div>
 
                 </div>

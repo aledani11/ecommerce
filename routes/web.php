@@ -20,3 +20,8 @@
 //Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/login', 'loginController@index')->name('login');
+
+Route::get('/register', 'registerController@index')->name('register');
+Route::post('/register', 'registerController@store')->name('register.store');
+
+Route::get('/index', 'indexController@index')->name('index');

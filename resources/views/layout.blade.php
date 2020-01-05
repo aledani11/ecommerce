@@ -16,6 +16,8 @@
 
     <title>@yield('title')</title>
 
+    <link rel="icon" href="img/core-img/favicon.ico">
+
     <link rel="stylesheet" href="css/core-style.css">
 
     @yield('link')
@@ -40,7 +42,7 @@
             <!-- Classy Menu -->
             <nav class="classy-navbar" id="essenceNav">
                 <!-- Logo -->
-                <a class="nav-brand" href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <a class="nav-brand" href="{{ route('index') }}"><img src="img/core-img/logo.png" alt=""></a>
                 <!-- Navbar Toggler -->
                 <div class="classy-navbar-toggler">
                     <span class="navbarToggler"><span></span><span></span><span></span></span>
@@ -97,8 +99,8 @@
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
                             </li>
-                            <li><a href="blog.html">Blog</a></li>
                             <li><a href="contact.html">Contact</a></li>
+                            <li><a href="{{ route('register') }}">Registarse</a></li>
                         </ul>
                     </div>
                     <!-- Nav End -->
@@ -120,7 +122,7 @@
                 </div>
                 <!-- User Login Info -->
                 <div class="user-login-info">
-                    <a href="#"><img src="img/core-img/user.svg" alt=""></a>
+                    <a href="{{ route('login') }}"><img src="img/core-img/user.svg" alt=""></a>
                 </div>
                 <!-- Cart Area -->
                 <div class="cart-area">
