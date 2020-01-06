@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Requests;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class registerStore extends FormRequest
+class loginAuth extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +26,19 @@ class registerStore extends FormRequest
     public function rules()
     {
         return [
-            'nya' => 'required|max:100|alpha_dash',
-            'email' => 'required|unique:customer|max:100|email:rfc,dns',
-            'direccion' => 'nullable|max:100',
-            'pass' => 'required|confirmed|max:100|min:8|alpha_dash',
-            'tel' => 'required|max:100|alpha_dash',
+            'pass' => ['required', 'min:8', 'max:100', 'alpha_dash', 
+            function ($attribute, $value, $fail) {
+                $hashedPassword = DB::table('customer')
+                ->select('password')
+                ->where('email','=',request()->email)
+                ->get();
+                if (!Hash::check($value, $hashedPassword[0]->password)) {
+                    //$fail($attribute . ' is invalid.');
+                    $fail('La contraseña no es correcta');
+                }
+            }],
+            // 'pass' => 'required|min:8|max:100|alpha_dash|',
+            'email' => 'required|exists:customer|max:100|email:rfc,dns',
         ];
     }
 
@@ -36,31 +46,21 @@ class registerStore extends FormRequest
     {
         return [
             'email' => 'correo electronico',
-            'nya' => 'nombre y apellido',
             'pass' => 'contraseña',
-            'tel' => 'telefono',
         ];
     }
 
     public function messages()
     {
         return [
-            'nya.required' => 'Ingrese :attribute',
             'email.required' => 'Ingrese :attribute',
             'pass.required' => 'Ingrese :attribute',
-            'tel.required' => 'Ingrese :attribute',
-            'nya.alpha_dash' => 'El :attribute solo puede contener letras, números, guiones y guiones bajos.',
             'pass.alpha_dash' => 'La :attribute solo puede contener letras, números, guiones y guiones bajos.',
-            'tel.alpha_dash' => 'El :attribute solo puede contener letras, números, guiones y guiones bajos.',
-            'nya.max' => 'En campo :attribute debe contener menos caracteres',
-            'email.unique'  => ':attribute ya registrado',
             'email.max'  => 'El :attribute debe contener menos caracteres',
             'email.email'  => 'El :attribute no es valido',
-            'direccion.max'  => 'El :attribute debe contener menos caracteres',
-            'pass.confirmed'  => 'Las contraseñas no coinciden',
+            'email.exists'  => 'El :attribute no esta registrado',
             'pass.max'  => 'La :attribute es demasiado larga',
             'pass.min'  => 'La :attribute debe contener mas de 8 caracteres',
-            'tel.max'  => 'El :attribute debe contener menos caracteres',
         ];
     }
 }

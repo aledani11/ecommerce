@@ -69,27 +69,27 @@ margin-bottom:3.5rem;
 
                 <div class="col-md-12 mb-3">
                     <label for="nya">Nombre y Apellido</label>
-                    <input type="text" class="form-control" id="nya" name="nya" value="" required>
+                    <input type="text" class="form-control @error('nya') is-invalid @enderror" id="nya" name="nya" value="{{ old('nya') }}" required>
                 </div>
                 <div class="col-md-12 mb-3">
                     <label for="tel">Telefono</label>
-                    <input type="text" class="form-control" id="tel" name="tel" value="" required>
+                    <input type="text" class="form-control @error('tel') is-invalid @enderror" id="tel" name="tel" value="{{ old('tel') }}" required>
                 </div>
                 <div class="col-md-12 mb-3">
                     <label for="direccion">Dirección</label>
-                    <input type="text" class="form-control" id="direccion" name="direccion" value="">
+                    <input type="text" class="form-control @error('direccion') is-invalid @enderror" id="direccion" name="direccion" value="{{ old('direccion') }}">
                 </div>
                 <div class="col-md-12 mb-3">
                     <label for="email">Correo electrónico</label>
-                    <input type="email" class="form-control" id="email" name="email" value="" required>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required>
                 </div>
                 <div class="col-md-12 mb-4">
                     <label for="pass">Contraseña</label>
-                    <input type="password" class="form-control" id="pass" name="pass" value="" required>
+                    <input type="password" class="form-control @error('pass') is-invalid @enderror" id="pass" name="pass" value="{{ old('pass') }}" required>
                 </div>
                 <div class="col-md-12 mb-4">
                     <label for="rpass">Repetir Contraseña</label>
-                    <input type="password" class="form-control" id="rpass" name="pass_confirmation" value="" required>
+                    <input type="password" class="form-control @error('pass') is-invalid @enderror" id="rpass" name="pass_confirmation" value="" required>
                 </div>
 
                 <div class="col-md-12 mb-2">

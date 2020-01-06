@@ -1,0 +1,402 @@
+warning: LF will be replaced by CRLF in app/Http/Controllers/loginController.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in app/Http/Controllers/registerController.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in app/Http/Requests/registerStore.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in routes/web.php.
+The file will have its original line endings in your working directory
+[1mdiff --git a/app/Http/Controllers/loginController.php b/app/Http/Controllers/loginController.php[m
+[1mindex 940214f..3a5e5fe 100644[m
+[1m--- a/app/Http/Controllers/loginController.php[m
+[1m+++ b/app/Http/Controllers/loginController.php[m
+[36m@@ -1,13 +1,46 @@[m
+ <?php[m
+ [m
+ namespace App\Http\Controllers;[m
+[32m+[m[32muse Illuminate\Http\Request;[m
+[32m+[m[32muse Illuminate\Support\Facades\DB;[m
+[32m+[m[32muse Illuminate\Support\Facades\Hash;[m
+[32m+[m[32muse App\Http\Requests\loginAuth;[m
+ [m
+ class loginController extends Controller[m
+ {[m
+    [m
+     public function index()[m
+     {[m
+[32m+[m[32m        //dump(session()->get('user'));[m
+[32m+[m[32m        //dump(session('user'));[m
+[32m+[m[32m        if(session('user') ==! null){[m
+[32m+[m[32m            return view('index');[m
+[32m+[m[32m        }[m
+[32m+[m[32m        return view('login');[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public function auth(loginAuth $request){[m
+[32m+[m[32m        /*$customer = DB::table('customer')->where('email', request()->email)->exists();[m
+[32m+[m[32m        //$customer1 = DB::table('customer')->where('email', request()->email)->count();[m
+[32m+[m[32m        //dd($customer,$customer1);[m
+[32m+[m[32m        if($customer){[m
+[32m+[m[32m            $hashedPassword = DB::table('customer')->select('password')->get();[m
+[32m+[m[32m            if (Hash::check(request()->pass, $hashedPassword)) {[m
+[32m+[m[32m                return view('index');[m
+[32m+[m[32m            }else{[m
+[32m+[m[32m                dd('pass');[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }else{[m
+[32m+[m[32m            dd("correo");[m
+[32m+[m[32m        }*/[m
+[32m+[m
+[32m+[m[32m        $request->session()->put('user', request()->email);[m
+[32m+[m
+[32m+[m[32m        return view('index');[m
+[32m+[m[32m    }[m
+ [m
+[32m+[m[32m    public function logout(request $request){[m
+[32m+[m[32m        $request->session()->forget('user');[m
+         return view('login');[m
+     }[m
+   [m
+[1mdiff --git a/app/Http/Controllers/registerController.php b/app/Http/Controllers/registerController.php[m
+[1mindex f0303f7..becf277 100644[m
+[1m--- a/app/Http/Controllers/registerController.php[m
+[1m+++ b/app/Http/Controllers/registerController.php[m
+[36m@@ -5,13 +5,16 @@[m [mnamespace App\Http\Controllers;[m
+ use Illuminate\Http\Request;[m
+ use Illuminate\Support\Facades\DB;[m
+ use App\Http\Requests\registerStore;[m
+[32m+[m[32muse Illuminate\Support\Facades\Hash;[m
+ [m
+ class registerController extends Controller[m
+ {[m
+ [m
+     public function index()[m
+     {[m
+[31m-[m
+[32m+[m[32m        if(session('user') ==! null){[m
+[32m+[m[32m            return view('index');[m
+[32m+[m[32m        }[m
+         return view('register');[m
+     }[m
+ [m
+[36m@@ -19,20 +22,43 @@[m [mclass registerController extends Controller[m
+     {[m
+         // dump(request()->all());[m
+ [m
+[31m-       /* $validatedData = $request->validate([[m
+[32m+[m[32m        /* $validatedData = $request->validate([[m
+             'nya' => 'required|max:100',[m
+             'email' => 'unique:customer',[m
+             'direccion' => 'nullable'[m
+         ]);*/[m
+ [m
+[31m-        DB::table('customer')->insert([m
+[32m+[m[32m        $code = bin2hex(random_bytes(15));[m
+[32m+[m
+[32m+[m[32m        $id = DB::table('customer')->insertGetId([m
+             [[m
+                 'name' => request()->nya, 'email' => request()->email,[m
+[31m-                'password' => request()->pass, 'address' => request()->direccion,[m
+[31m-                'contact' => request()->tel[m
+[32m+[m[32m                'password' => Hash::make(request()->pass), 'address' => request()->direccion,[m
+[32m+[m[32m                'contact' => request()->tel, 'code' => $code,[m
+[32m+[m[32m                'created' => now()[m
+             ][m
+         );[m
+ [m
+[32m+[m[32m       /* $subject = 'Verificacion de cuenta';[m
+[32m+[m
+[32m+[m[32m        $message = '[m
+[32m+[m[32m                    <html>[m
+[32m+[m[32m                    <head>[m
+[32m+[m[32m                    <title>Verificacion de cuenta</title>[m
+[32m+[m[32m                    </head>[m
+[32m+[m[32m                    <body>[m
+[32m+[m[32m                    <h3>Gracias por registrarte!</h3>[m
+[32m+[m[32m                    <p>Activa tu cuenta presionando el link de abajo</p>[m
+[32m+[m[32m                    <a href="http://localhost/ecommerce/activate?code='.$code.'&user='.$id.'>Activar Cuenta</a>[m
+[32m+[m[32m                    </body>[m
+[32m+[m[32m                    </html>[m
+[32m+[m[32m                    ';[m
+[32m+[m
+[32m+[m[32m                    $headers[] = 'MIME-Version: 1.0';[m
+[32m+[m[32m                    $headers[] = 'Content-type: text/html; charset=iso-8859-1';[m
+[32m+[m
+[32m+[m[32m                    mail(request()->email, $subject, $message, implode("\r\n", $headers));*/[m
+[32m+[m
+         return redirect()->route('register');[m
+     }[m
+ }[m
+[1mdiff --git a/app/Http/Requests/registerStore.php b/app/Http/Requests/registerStore.php[m
+[1mindex 9a322ff..6ddbfe6 100644[m
+[1m--- a/app/Http/Requests/registerStore.php[m
+[1m+++ b/app/Http/Requests/registerStore.php[m
+[36m@@ -25,7 +25,7 @@[m [mclass registerStore extends FormRequest[m
+     {[m
+         return [[m
+             'nya' => 'required|max:100|alpha_dash',[m
+[31m-            'email' => 'required|unique:customer|max:100',[m
+[32m+[m[32m            'email' => 'required|unique:customer|max:100|email:rfc,dns',[m
+             'direccion' => 'nullable|max:100',[m
+             'pass' => 'required|confirmed|max:100|min:8|alpha_dash',[m
+             'tel' => 'required|max:100|alpha_dash',[m
+[36m@@ -55,10 +55,11 @@[m [mclass registerStore extends FormRequest[m
+             'nya.max' => 'En campo :attribute debe contener menos caracteres',[m
+             'email.unique'  => ':attribute ya registrado',[m
+             'email.max'  => 'El :attribute debe contener menos caracteres',[m
+[32m+[m[32m            'email.email'  => 'El :attribute no es valido',[m
+             'direccion.max'  => 'El :attribute debe contener menos caracteres',[m
+             'pass.confirmed'  => 'Las contraseñas no coinciden',[m
+             'pass.max'  => 'La :attribute es demasiado larga',[m
+[31m-            'pass.min'  => 'La :attribute es demasiado corta',[m
+[32m+[m[32m            'pass.min'  => 'La :attribute debe contener mas de 8 caracteres',[m
+             'tel.max'  => 'El :attribute debe contener menos caracteres',[m
+         ];[m
+     }[m
+[1mdiff --git a/resources/views/layout.blade.php b/resources/views/layout.blade.php[m
+[1mindex b98e39b..0934631 100644[m
+[1m--- a/resources/views/layout.blade.php[m
+[1m+++ b/resources/views/layout.blade.php[m
+[36m@@ -36,8 +36,8 @@[m
+ <body>[m
+ [m
+ [m
+[31m-<!-- ##### Header Area Start ##### -->[m
+[31m-<header class="header_area">[m
+[32m+[m[32m    <!-- ##### Header Area Start ##### -->[m
+[32m+[m[32m    <header class="header_area">[m
+         <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">[m
+             <!-- Classy Menu -->[m
+             <nav class="classy-navbar" id="essenceNav">[m
+[36m@@ -101,6 +101,9 @@[m
+                             </li>[m
+                             <li><a href="contact.html">Contact</a></li>[m
+                             <li><a href="{{ route('register') }}">Registarse</a></li>[m
+[32m+[m[32m                            @if (session('user') ==!null)[m
+[32m+[m[32m                            <li><a href="{{ route('logout') }}">Salir</a></li>[m
+[32m+[m[32m                            @endif[m
+                         </ul>[m
+                     </div>[m
+                     <!-- Nav End -->[m
+[36m@@ -154,7 +157,7 @@[m
+                         <img src="img/product-img/product-1.jpg" class="cart-thumb" alt="">[m
+                         <!-- Cart Item Desc -->[m
+                         <div class="cart-item-desc">[m
+[31m-                          <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>[m
+[32m+[m[32m                            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>[m
+                             <span class="badge">Mango</span>[m
+                             <h6>Button Through Strap Mini Dress</h6>[m
+                             <p class="size">Size: S</p>[m
+[36m@@ -170,7 +173,7 @@[m
+                         <img src="img/product-img/product-2.jpg" class="cart-thumb" alt="">[m
+                         <!-- Cart Item Desc -->[m
+                         <div class="cart-item-desc">[m
+[31m-                          <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>[m
+[32m+[m[32m                            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>[m
+                             <span class="badge">Mango</span>[m
+                             <h6>Button Through Strap Mini Dress</h6>[m
+                             <p class="size">Size: S</p>[m
+[36m@@ -186,7 +189,7 @@[m
+                         <img src="img/product-img/product-3.jpg" class="cart-thumb" alt="">[m
+                         <!-- Cart Item Desc -->[m
+                         <div class="cart-item-desc">[m
+[31m-                          <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>[m
+[32m+[m[32m                            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>[m
+                             <span class="badge">Mango</span>[m
+                             <h6>Button Through Strap Mini Dress</h6>[m
+                             <p class="size">Size: S</p>[m
+[1mdiff --git a/resources/views/login.blade.php b/resources/views/login.blade.php[m
+[1mindex 049b5e8..44b6ea4 100644[m
+[1m--- a/resources/views/login.blade.php[m
+[1m+++ b/resources/views/login.blade.php[m
+[36m@@ -16,69 +16,82 @@[m
+ @endsection[m
+ [m
+ @section('style')[m
+[31m-        a[class="link_login"] {[m
+[31m-            display: block;[m
+[31m-            font-size: 12px;[m
+[31m-            font-weight: 600;[m
+[31m-            margin-bottom: 0;[m
+[31m-            color: #0315ff;[m
+[31m-            letter-spacing: 1.5px;[m
+[31m-            text-transform: uppercase;[m
+[31m-            margin-bottom: 10px;[m
+[31m-        }[m
+[31m-        #login a:first-of-type{[m
+[31m-            margin-bottom:1.5rem!important;[m
+[31m-        }[m
+[31m-        /*#login a:first-child{[m
+[31m-            margin-bottom:1.5rem!important;[m
+[31m-        }[m
+[31m-        #login a:nth-of-type(1){[m
+[31m-            margin-bottom:1.5rem!important;[m
+[31m-        }*/[m
+[31m-        #form_login{[m
+[31m-            margin-top:9rem;[m
+[31m-            margin-bottom:3.5rem;[m
+[31m-        }[m
+[32m+[m[32ma[class="link_login"] {[m
+[32m+[m[32mdisplay: block;[m
+[32m+[m[32mfont-size: 12px;[m
+[32m+[m[32mfont-weight: 600;[m
+[32m+[m[32mmargin-bottom: 0;[m
+[32m+[m[32mcolor: #0315ff;[m
+[32m+[m[32mletter-spacing: 1.5px;[m
+[32m+[m[32mtext-transform: uppercase;[m
+[32m+[m[32mmargin-bottom: 10px;[m
+[32m+[m[32m}[m
+[32m+[m[32m#login button:first-of-type{[m
+[32m+[m[32mmargin-bottom:1.5rem!important;[m
+[32m+[m[32m}[m
+[32m+[m[32m/*#login a:first-child{[m
+[32m+[m[32mmargin-bottom:1.5rem!important;[m
+[32m+[m[32m}[m
+[32m+[m[32m#login a:nth-of-type(1){[m
+[32m+[m[32mmargin-bottom:1.5rem!important;[m
+[32m+[m[32m}*/[m
+[32m+[m[32m#form_login{[m
+[32m+[m[32mmargin-top:9rem;[m
+[32m+[m[32mmargin-bottom:3.5rem;[m
+[32m+[m[32m}[m
+ @endsection[m
+ [m
+ @section('content')[m
+ [m
+[31m-    <form action="#" method="post" id="form_login">[m
+[31m-        <div class="container col-md-4">[m
+[31m-            <div class="row">[m
+[32m+[m[32m<form method="POST" id="form_login" action="{{route('login.auth')}}">[m
+[32m+[m[32m    @csrf[m
+[32m+[m[32m    <div class="container col-md-4">[m
+[32m+[m[32m        <div class="row">[m
+ [m
+[31m-                <div id="login" class="row" style="margin:auto; border:1px solid #e8e8e8;">[m
+[32m+[m[32m            <div id="login" class="row" style="margin:auto; border:1px solid #e8e8e8;">[m
+ [m
+[31m-                    <div class="col-md-12 mb-3 mt-3">[m
+[31m-                        <div class="mb-30" style="display:block;text-align:center">[m
+[31m-                            <h5>Login</h5>[m
+[31m-                        </div>[m
+[32m+[m[32m                <div class="col-md-12 mb-3 mt-3">[m
+[32m+[m[32m                    <div class="mb-30" style="display:block;text-align:center">[m
+[32m+[m[32m                        <h5>Login</h5>[m
+                     </div>[m
+[32m+[m[32m                </div>[m
+ [m
+[31m-                    <div class="col-md-12 mb-3">[m
+[31m-                        <label for="email">Correo electrónico</label>[m
+[31m-                        <input type="email" class="form-control" id="email" value="">[m
+[31m-                    </div>[m
+[31m-                    <div class="col-md-12 mb-4">[m
+[31m-                        <label for="pass">Contraseña</label>[m
+[31m-                        <input type="password" class="form-control" id="pass" value="">[m
+[32m+[m[32m                @if ($errors->any())[m
+[32m+[m[32m                <div class="col-md-12 mb-3">[m
+[32m+[m[32m                    <div class="alert alert-danger">[m
+[32m+[m[32m                        <ul>[m
+[32m+[m[32m                            @foreach ($errors->all() as $error)[m
+[32m+[m[32m                            <li>{{ $error }}</li>[m
+[32m+[m[32m                            @endforeach[m
+[32m+[m[32m                        </ul>[m
+                     </div>[m
+[32m+[m[32m                </div>[m
+[32m+[m[32m                @endif[m
+ [m
+[31m-                    <div class="col-md-12 mb-2">[m
+[31m-                        <a href="#" class="btn essence-btn">Iniciar Sesión</a>[m
+[31m-                    </div>[m
+[32m+[m[32m                <div class="col-md-12 mb-3">[m
+[32m+[m[32m                    <label for="email">Correo electrónico</label>[m
+[32m+[m[32m                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required>[m
+[32m+[m[32m                </div>[m
+[32m+[m[32m                <div class="col-md-12 mb-4">[m
+[32m+[m[32m                    <label for="pass">Contraseña</label>[m
+[32m+[m[32m                    <input type="password" class="form-control @error('pass') is-invalid @enderror" id="pass" name="pass" value="{{ old('pass') }}" required>[m
+[32m+[m[32m                </div>[m
+ [m
+[31m-                    <div class="col-md-12 mb-2">[m
+[31m-                        <a href="#" class="link_login">¿Has olvidado la contraseña?</a>[m
+[31m-                    </div>[m
+[32m+[m[32m                <div class="col-md-12 mb-2">[m
+[32m+[m[32m                    <button type="submit" class="btn essence-btn">Iniciar Sesión</button>[m
+[32m+[m[32m                </div>[m
+ [m
+[31m-                    <div class="col-md-12 mb-2">[m
+[31m-                        <a href="{{ route('register') }}" class="link_login">Registrarse</a>[m
+[31m-                    </div>[m
+[32m+[m[32m                <div class="col-md-12 mb-2">[m
+[32m+[m[32m                    <a href="#" class="link_login">¿Has olvidado la contraseña?</a>[m
+[32m+[m[32m                </div>[m
+ [m
+[32m+[m[32m                <div class="col-md-12 mb-2">[m
+[32m+[m[32m                    <a href="{{ route('register') }}" class="link_login">Registrarse</a>[m
+                 </div>[m
+ [m
+             </div>[m
+[32m+[m
+         </div>[m
+[31m-    </form>[m
+[31m-    @endsection[m
+\ No newline at end of file[m
+[32m+[m[32m    </div>[m
+[32m+[m[32m</form>[m
+[32m+[m[32m@endsection[m
+\ No newline at end of file[m
+[1mdiff --git a/resources/views/register.blade.php b/resources/views/register.blade.php[m
+[1mindex 458ce49..ec1180e 100644[m
+[1m--- a/resources/views/register.blade.php[m
+[1m+++ b/resources/views/register.blade.php[m
+[36m@@ -69,27 +69,27 @@[m [mmargin-bottom:3.5rem;[m
+ [m
+                 <div class="col-md-12 mb-3">[m
+                     <label for="nya">Nombre y Apellido</label>[m
+[31m-                    <input type="text" class="form-control" id="nya" name="nya" value="" required>[m
+[32m+[m[32m                    <input type="text" class="form-control @error('nya') is-invalid @enderror" id="nya" name="nya" value="{{ old('nya') }}" required>[m
+                 </div>[m
+                 <div class="col-md-12 mb-3">[m
+                     <label for="tel">Telefono</label>[m
+[31m-                    <input type="text" class="form-control" id="tel" name="tel" value="" required>[m
+[32m+[m[32m                    <input type="text" class="form-control @error('tel') is-invalid @enderror" id="tel" name="tel" value="{{ old('tel') }}" required>[m
+                 </div>[m
+                 <div class="col-md-12 mb-3">[m
+                     <label for="direccion">Dirección</label>[m
+[31m-                    <input type="text" class="form-control" id="direccion" name="direccion" value="">[m
+[32m+[m[32m                    <input type="text" class="form-control @error('direccion') is-invalid @enderror" id="direccion" name="direccion" value="{{ old('direccion') }}">[m
+                 </div>[m
+                 <div class="col-md-12 mb-3">[m
+                     <label for="email">Correo electrónico</label>[m
+[31m-                    <input type="email" class="form-control" id="email" name="email" value="" required>[m
+[32m+[m[32m                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required>[m
+                 </div>[m
+                 <div class="col-md-12 mb-4">[m
+                     <label for="pass">Contraseña</label>[m
+[31m-                    <input type="password" class="form-control" id="pass" name="pass" value="" required>[m
+[32m+[m[32m                    <input type="password" class="form-control @error('pass') is-invalid @enderror" id="pass" name="pass" value="{{ old('pass') }}" required>[m
+                 </div>[m
+                 <div class="col-md-12 mb-4">[m
+                     <label for="rpass">Repetir Contraseña</label>[m
+[31m-                    <input type="password" class="form-control" id="rpass" name="pass_confirmation" value="" required>[m
+[32m+[m[32m                    <input type="password" class="form-control @error('pass') is-invalid @enderror" id="rpass" name="pass_confirmation" value="" required>[m
+                 </div>[m
+ [m
+                 <div class="col-md-12 mb-2">[m
+[1mdiff --git a/routes/web.php b/routes/web.php[m
+[1mindex 31be464..199fe3b 100644[m
+[1m--- a/routes/web.php[m
+[1m+++ b/routes/web.php[m
+[36m@@ -20,8 +20,11 @@[m
+ //Route::get('/home', 'HomeController@index')->name('home');[m
+ [m
+ Route::get('/login', 'loginController@index')->name('login');[m
+[32m+[m[32mRoute::post('/login', 'loginController@auth')->name('login.auth');[m
+ [m
+ Route::get('/register', 'registerController@index')->name('register');[m
+ Route::post('/register', 'registerController@store')->name('register.store');[m
+ [m
+[31m-Route::get('/index', 'indexController@index')->name('index');[m
+\ No newline at end of file[m
+[32m+[m[32mRoute::get('/index', 'indexController@index')->name('index');[m
+[32m+[m
+[32m+[m[32mRoute::get('/logout', 'loginController@logout')->name('logout');[m
+\ No newline at end of file[m

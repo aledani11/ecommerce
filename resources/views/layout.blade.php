@@ -36,8 +36,8 @@
 <body>
 
 
-<!-- ##### Header Area Start ##### -->
-<header class="header_area">
+    <!-- ##### Header Area Start ##### -->
+    <header class="header_area">
         <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
             <!-- Classy Menu -->
             <nav class="classy-navbar" id="essenceNav">
@@ -101,6 +101,9 @@
                             </li>
                             <li><a href="contact.html">Contact</a></li>
                             <li><a href="{{ route('register') }}">Registarse</a></li>
+                            @if (session('user') ==!null)
+                            <li><a href="{{ route('logout') }}">Salir</a></li>
+                            @endif
                         </ul>
                     </div>
                     <!-- Nav End -->
@@ -154,7 +157,7 @@
                         <img src="img/product-img/product-1.jpg" class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
-                          <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
+                            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
                             <span class="badge">Mango</span>
                             <h6>Button Through Strap Mini Dress</h6>
                             <p class="size">Size: S</p>
@@ -170,7 +173,7 @@
                         <img src="img/product-img/product-2.jpg" class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
-                          <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
+                            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
                             <span class="badge">Mango</span>
                             <h6>Button Through Strap Mini Dress</h6>
                             <p class="size">Size: S</p>
@@ -186,7 +189,7 @@
                         <img src="img/product-img/product-3.jpg" class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
-                          <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
+                            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
                             <span class="badge">Mango</span>
                             <h6>Button Through Strap Mini Dress</h6>
                             <p class="size">Size: S</p>
