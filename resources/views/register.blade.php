@@ -67,6 +67,16 @@ margin-bottom:3.5rem;
                 </div>
                 @endif
 
+                @if (session('success')==!null)
+                <div class="col-md-12 mb-3">
+                    <div class="alert alert-success">
+                        <ul>
+                            <li>{{ session('success') }}</li>
+                        </ul>
+                    </div>
+                </div>
+                @endif
+
                 <div class="col-md-12 mb-3">
                     <label for="nya">Nombre y Apellido</label>
                     <input type="text" class="form-control @error('nya') is-invalid @enderror" id="nya" name="nya" value="{{ old('nya') }}" required>

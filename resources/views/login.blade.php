@@ -68,6 +68,26 @@ margin-bottom:3.5rem;
                 </div>
                 @endif
 
+                @if (isset($err))
+                <div class="col-md-12 mb-3">
+                    <div class="alert alert-danger">
+                        <ul>
+                            <li>{{ $err }}</li>
+                        </ul>
+                    </div>
+                </div>
+                @endif
+
+                @if (isset($activate))
+                <div class="col-md-12 mb-3">
+                    <div class="alert alert-success">
+                        <ul>
+                            <li>{{ $activate }}</li>
+                        </ul>
+                    </div>
+                </div>
+                @endif
+
                 <div class="col-md-12 mb-3">
                     <label for="email">Correo electrónico</label>
                     <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required>

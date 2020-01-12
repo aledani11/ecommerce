@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
@@ -26,19 +27,35 @@ class loginAuth extends FormRequest
     public function rules()
     {
         return [
-            'pass' => ['required', 'min:8', 'max:100', 'alpha_dash', 
-            function ($attribute, $value, $fail) {
-                $hashedPassword = DB::table('customer')
-                ->select('password')
-                ->where('email','=',request()->email)
-                ->get();
-                if (!Hash::check($value, $hashedPassword[0]->password)) {
-                    //$fail($attribute . ' is invalid.');
-                    $fail('La contraseña no es correcta');
+            'email' => [
+                'required', 'exists:customer', 'max:100', 'email:rfc,dns',
+                function ($attribute, $value, $fail) {
+                    $status = DB::table('customer')
+                        ->select('status')
+                        ->where('email', '=', request()->email)
+                        ->get();
+                    if (count($status)) {
+                        if (!$status[0]->status) {
+                            $fail('La cuenta no esta activada');
+                        }
+                    }
                 }
-            }],
-            // 'pass' => 'required|min:8|max:100|alpha_dash|',
-            'email' => 'required|exists:customer|max:100|email:rfc,dns',
+            ],
+            'pass' => [
+                'required', 'min:8', 'max:100', 'alpha_dash',
+                function ($attribute, $value, $fail) {
+                    $hashedPassword = DB::table('customer')
+                        ->select('password')
+                        ->where('email', '=', request()->email)
+                        ->get();
+                    if (count($hashedPassword)) {
+                        if (!Hash::check($value, $hashedPassword[0]->password)) {
+                            //$fail($attribute . ' is invalid.');
+                            $fail('La contraseña no es correcta');
+                        }
+                    }
+                }
+            ],
         ];
     }
 

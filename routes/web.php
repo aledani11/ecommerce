@@ -27,4 +27,9 @@ Route::post('/register', 'registerController@store')->name('register.store');
 
 Route::get('/index', 'indexController@index')->name('index');
 
+Route::get('/shop', 'shopController@index')->name('shop');
+Route::get('/shop/{id}', 'shopController@detail')->name('shop.detail');
+
 Route::get('/logout', 'loginController@logout')->name('logout');
+
+Route::get('/activate', 'registerController@activate')->name('activate');

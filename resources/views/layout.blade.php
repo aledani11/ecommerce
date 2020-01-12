@@ -99,10 +99,12 @@
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
                             </li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="contact.html">Contacto</a></li>
                             <li><a href="{{ route('register') }}">Registarse</a></li>
                             @if (session('user') ==!null)
-                            <li><a href="{{ route('logout') }}">Salir</a></li>
+                            <li><a href="{{ route('logout') }}">Cerrar Sesión</a></li>
+                            @else
+                            <li><a href="{{ route('login') }}">Iniciar Sesión</a></li>
                             @endif
                         </ul>
                     </div>
