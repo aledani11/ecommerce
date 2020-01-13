@@ -52,7 +52,27 @@ class shopController extends Controller
     }
 
     public function detail($id){
-        dd($id);
+        $room = DB::table('rooms')
+            ->select(
+                'rooms.*',
+                'rt.name as room_type'
+            )
+            ->where('rooms.id', '=', $id)
+            ->leftJoin('rooms_type as rt', 'rooms.id_type', '=', 'rt.id')
+            ->get();
+
+            $charact = DB::table('room_characteristics')
+            ->select(
+                'c.*'
+            )
+            ->where('id_room', '=', $id)
+            ->leftJoin('characteristics as c', 'c.id', '=', 'room_characteristics.id_characteristic')
+            ->get();
+
+            /*return view('detail', ['rooms' => $rooms,
+                            'rooms_type' => $rooms_type]);*/
+            return view('detail', ['rooms' => $room,
+                                    'characteristics'=> $charact]);
     }
   
 }

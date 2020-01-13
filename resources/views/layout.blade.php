@@ -16,14 +16,14 @@
 
     <title>@yield('title')</title>
 
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="/img/core-img/favicon.ico">
 
-    <link rel="stylesheet" href="css/core-style.css">
+    <link rel="stylesheet" href="/css/core-style.css">
 
     @yield('link')
 
     <style>
-        @yield('style');
+        @yield('style')
     </style>
 
     @yield('script')
@@ -42,7 +42,7 @@
             <!-- Classy Menu -->
             <nav class="classy-navbar" id="essenceNav">
                 <!-- Logo -->
-                <a class="nav-brand" href="{{ route('index') }}"><img src="img/core-img/logo.png" alt=""></a>
+                <a class="nav-brand" href="{{ route('index') }}"><img src="/img/core-img/logo.png" alt=""></a>
                 <!-- Navbar Toggler -->
                 <div class="classy-navbar-toggler">
                     <span class="navbarToggler"><span></span><span></span><span></span></span>
@@ -83,7 +83,7 @@
                                         <li><a href="shop.html">Trench</a></li>
                                     </ul>
                                     <div class="single-mega cn-col-4">
-                                        <img src="img/bg-img/bg-6.jpg" alt="">
+                                        <img src="/img/bg-img/bg-6.jpg" alt="">
                                     </div>
                                 </div>
                             </li>
@@ -123,15 +123,15 @@
                 </div>
                 <!-- Favourite Area -->
                 <div class="favourite-area">
-                    <a href="#"><img src="img/core-img/heart.svg" alt=""></a>
+                    <a href="#"><img src="/img/core-img/heart.svg" alt=""></a>
                 </div>
                 <!-- User Login Info -->
                 <div class="user-login-info">
-                    <a href="{{ route('login') }}"><img src="img/core-img/user.svg" alt=""></a>
+                    <a href="{{ route('login') }}"><img src="/img/core-img/user.svg" alt=""></a>
                 </div>
                 <!-- Cart Area -->
                 <div class="cart-area">
-                    <a href="#" id="essenceCartBtn"><img src="img/core-img/bag.svg" alt=""> <span>3</span></a>
+                    <a href="#" id="essenceCartBtn"><img src="/img/core-img/bag.svg" alt=""> <span>3</span></a>
                 </div>
             </div>
 
@@ -146,7 +146,7 @@
 
         <!-- Cart Button -->
         <div class="cart-button">
-            <a href="#" id="rightSideCart"><img src="img/core-img/bag.svg" alt=""> <span>3</span></a>
+            <a href="#" id="rightSideCart"><img src="/img/core-img/bag.svg" alt=""> <span>3</span></a>
         </div>
 
         <div class="cart-content d-flex">
@@ -156,7 +156,7 @@
                 <!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
-                        <img src="img/product-img/product-1.jpg" class="cart-thumb" alt="">
+                        <img src="/img/product-img/product-1.jpg" class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
                             <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
@@ -172,7 +172,7 @@
                 <!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
-                        <img src="img/product-img/product-2.jpg" class="cart-thumb" alt="">
+                        <img src="/img/product-img/product-2.jpg" class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
                             <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
@@ -188,7 +188,7 @@
                 <!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
-                        <img src="img/product-img/product-3.jpg" class="cart-thumb" alt="">
+                        <img src="/img/product-img/product-3.jpg" class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
                             <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
@@ -307,17 +307,17 @@
 
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="/js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
-    <script src="js/popper.min.js"></script>
+    <script src="/js/popper.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     <!-- Plugins js -->
-    <script src="js/plugins.js"></script>
+    <script src="/js/plugins.js"></script>
     <!-- Classy Nav js -->
-    <script src="js/classy-nav.min.js"></script>
+    <script src="/js/classy-nav.min.js"></script>
     <!-- Active js -->
-    <script src="js/active.js"></script>
+    <script src="/js/active.js"></script>
 </body>
 
 </html>
