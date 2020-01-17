@@ -8,6 +8,8 @@
 @endsection
 
 @section('link')
+<link rel="stylesheet" href="/css/core-style.css">
+
 @endsection
 
 @section('title','STOREPY')
@@ -41,21 +43,42 @@
 
         <!-- Form -->
         <form class="cart-form clearfix" method="post">
-            <!-- Cart & Favourite Box -->
-            <div class="cart-fav-box d-flex align-items-center">
-                <!-- Cart -->
-                <button type="submit" name="addtocart" value="5" class="btn essence-btn">Add to cart</button>
-                <!-- Favourite -->
-                <div class="product-favourite ml-4">
-                    <a href="#" class="favme fa fa-heart"></a>
+            <div class="row">
+            <div class="col-6">
+                <div class="select-box d-flex mt-50">
+                    <label for="check_in" style="display:block;">Entrada</label>
+                </div>
+                <div class="select-box d-flex mb-30">
+                    <input type="date" style="margin-right:10%" name="check_in" id="check_in" value="{{\Carbon\Carbon::now(new DateTimeZone('America/Asuncion'))->format('Y-m-d')}}">
                 </div>
             </div>
-            <div class="select-box d-flex mt-50 mb-30">
-                @foreach($characteristics as $charact)
-                    <span style="margin:1%">{{$charact->name}}</span>
-                @endforeach
+            <div class="col-6">
+                <div class="select-box d-flex mt-50">
+                    <label for="check_out" style="display:block;">Salida</label>
+                </div>
+                <div class="select-box d-flex mb-30">
+                    <input type="date" name="check_out" id="check_out" value="{{\Carbon\Carbon::tomorrow(new DateTimeZone('America/Asuncion'))->format('Y-m-d')}}">
+                </div>
+            </div>
+            </div>
+            <!-- Cart & Favourite Box -->
+            <div class="col-md mb-2" id="message">
+                    
+                </div>
+            <div class="cart-fav-box d-flex align-items-center mt-50">
+                <!-- Cart -->
+                <button type="submit" id="addtocart" path="{{route('cart.add')}}" room="{{$rooms[0]->id}}" name="addtocart" class="btn essence-btn">Reservar</button>
+                <!-- Favourite -->
+                <div class="product-favourite ml-4">
+                    <a href="" class="favme fa fa-heart"></a>
+                </div>
             </div>
         </form>
+        <div class="select-box d-flex mt-50 mb-30">
+            @foreach($characteristics as $charact)
+            <span style="margin:1%">{{$charact->name}}</span>
+            @endforeach
+        </div>
     </div>
 </section>
 <!-- ##### Single Product Details Area End ##### -->

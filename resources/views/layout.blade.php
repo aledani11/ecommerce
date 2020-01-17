@@ -156,7 +156,7 @@
                 <!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
-                        <img src="/img/product-img/product-1.jpg" class="cart-thumb" alt="">
+                        <img src="/img/product-img/individual.jpg" class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
                             <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
@@ -318,6 +318,7 @@
     <script src="/js/classy-nav.min.js"></script>
     <!-- Active js -->
     <script src="/js/active.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 
 </html>
