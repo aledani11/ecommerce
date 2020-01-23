@@ -8,8 +8,6 @@
 @endsection
 
 @section('link')
-<link rel="stylesheet" href="/css/core-style.css">
-
 @endsection
 
 @section('title','STOREPY')
@@ -18,7 +16,6 @@
 @endsection
 
 @section('style')
-
 @endsection
 
 @section('content')

@@ -13,7 +13,7 @@ class loginController extends Controller
     {
         //dump(session()->get('user'));
         //dump(session('user'));
-        if(session('user') ==! null){
+        if(session('user') !== null){
             return view('index');
         }
         return view('login');
@@ -36,6 +36,9 @@ class loginController extends Controller
 
         $request->session()->put('user', request()->email);
 
+        if(session('cart') !== null){
+            return redirect()->route('checkout');
+        }
         return view('index');
     }
 

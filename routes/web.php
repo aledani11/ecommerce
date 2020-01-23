@@ -31,6 +31,10 @@ Route::get('/shop', 'shopController@index')->name('shop');
 Route::get('/shop/{id}', 'shopController@detail')->name('shop.detail');
 
 Route::post('/cart_add', 'cartController@add')->name('cart.add');
+Route::post('/cart_get', 'cartController@getCart')->name('cart.get');
+Route::post('/cart_delete', 'cartController@delete')->name('cart.delete');
+
+Route::get('/checkout', 'checkoutController@index')->name('checkout');
 
 Route::get('/logout', 'loginController@logout')->name('logout');
 
