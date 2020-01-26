@@ -34,7 +34,7 @@ class cartController extends Controller
         //return view('shop');
         //  return"good done!";
         //} else {
-        if (session('cart') == !null) {
+        if (session('cart') !== null) {
             if (in_array(request()->id, session('cart'), true)) {
                 return "<div class='alert alert-danger'>
                         <ul>
@@ -43,12 +43,30 @@ class cartController extends Controller
                         </div>";
             }
         }
-        request()->session()->push('cart', request()->id);
-        return "<div class='alert alert-success'>
+        if (isset(request()->c_in) && isset(request()->c_out)) {
+            if (request()->c_in <= request()->c_out) {
+                request()->session()->push('cart', request()->id);
+                request()->session()->put('check_in' . request()->id, request()->c_in);
+                request()->session()->put('check_out' . request()->id, request()->c_out);
+                return "<div class='alert alert-success'>
                         <ul>
                             <li>Habitacion agregada al carrito</li>
                         </ul>
                         </div>";
+            } else {
+                return "<div class='alert alert-danger'>
+                                    <ul>
+                                        <li>Fecha de entrada no puede ser mayor a fecha de salida</li>
+                                    </ul>
+                                    </div>";
+            }
+        } else {
+            return "<div class='alert alert-danger'>
+                        <ul>
+                            <li>Fecha de entrada o fecha de salida están vacías</li>
+                        </ul>
+                        </div>";
+        }
         //}
         //  return view('shop');  
         // return request()->id;
@@ -61,6 +79,8 @@ class cartController extends Controller
     {
         $cart = session()->pull('cart', []);
         if (($key = array_search(request()->id, $cart)) !== false) {
+            request()->session()->forget('check_in'.request()->id);
+            request()->session()->forget('check_out'.request()->id);
             unset($cart[$key]);
         }
         if (count($cart)) {

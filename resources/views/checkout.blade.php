@@ -18,6 +18,7 @@
 <script src="https://www.paypal.com/sdk/js?client-id=AWLN5cVOq9rSpM4sBut_g5RigSUBjhqaxRu4gDQo48nf4JMXym0GssefjQNoBK61lwUSsgXbrOB4B4u-"></script>
 @if (session('user') !== null)
 <script>
+    var items = <?php echo json_encode($items); ?>;
     paypal.Buttons({
         createOrder: function(data, actions) {
             // This function sets up the details of the transaction, including the amount and line item details.
@@ -33,7 +34,7 @@
                             }
                         }
                     },
-                    items: {!! str_replace('"','',json_encode($items)) !!}
+                    items: items
                 }]
             });
         },
@@ -42,7 +43,12 @@
             return actions.order.capture().then(function(details) {
                 // This function shows a transaction success message to your buyer.
                 alert('Transaction completed by ' + details.payer.name.given_name);
-                console.log(details);
+                console.log(details.id);
+                console.log(details.payer.name.given_name);
+                console.log(details.payer.name.surname);
+                console.log(details.payer.email_address);
+                //console.log(details.purchase_units.payments.captures.amount);
+              //  console.log(details.purchase_units);
             });
         }
     }).render('#paypal-button-container')
@@ -98,10 +104,17 @@ margin-bottom: 10px;
                     </div>
                     @endif
                     <ul class="order-details-form mb-4">
-                        <li><span>Habitacion</span> <span>Total</span></li>
+                        <li><span>Dias - Total</span><span>Habitacion</span></li>
                         @isset($results)
                         @foreach($results as $result)
-                        <li><span>{{$result->title}}</span> <span>${{$result->price}}</span></li>
+                        @php
+                        $check_in = new DateTime(session('check_in'.$result->id));
+                        $check_out = new DateTime(session('check_out'.$result->id));
+                        $interval = $check_in->diff($check_out);
+                        $day = (int)$interval->days;
+                        ($day !== 0)?:$day=1; 
+                        @endphp
+                        <li><span>{{$day}} {{($day==1)?"Dia":"Dias"}} - ${{($day*((int)$result->price))}}</span><span>{{$result->title}}</span></li>
                         @endforeach
                         @endisset
                         <li><span>Total</span> <span>${{$total}}</span></li>

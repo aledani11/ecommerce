@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\loginAuth;
+use DateTime;
 
 class checkoutController extends Controller
 {
@@ -23,19 +24,25 @@ class checkoutController extends Controller
             $total = 0;
             $item=[];
             foreach ($result as $key => $value) {
-                $total += $result[$key]->price;
-                $item[$key]= "{name:'".$result[$key]->title."' ,unit_amount:{value:'".$result[$key]->price."', currency_code: 'USD'} ,quantity:'1'}";
+                $check_in = new DateTime(session('check_in'.$result[$key]->id));
+                $check_out = new DateTime(session('check_out'.$result[$key]->id));
+                $interval = $check_in->diff($check_out);
+                $day = (int)$interval->days;
+                ($day !== 0) ?: $day=1;
+                $total += ($day * ((int)$result[$key]->price));
+                $item[] = array('name' => $result[$key]->title, 'unit_amount' => array('value' => $result[$key]->price, 'currency_code' => 'USD'), 'quantity' => $day);
+                //$item[$key]= "{name:'".$result[$key]->title."' ,unit_amount:{value:'".$result[$key]->price."', currency_code: 'USD'} ,quantity:'1'}";
                 //$item[]= (['name' => ''.$result[$key]->title.'', 'unit_amount' => '{value:'.''.$result[$key]->price.''.', currency_code:'.''.'USD'.''.' }','quantity'=>'1']);
                 //$item[]= (['name' => ''.$result[$key]->title.'', 'unit_amount' => '{value:'.$result[$key]->price.', currency_code:'.'USD'.' }','quantity'=>'1']);
             }
 //dump($result);
-//dd($item);
+//dd(json_encode($item));
             return view('checkout', [
                 'results' => $result,
                 'total' => $total,
                 'items' => $item
             ]);
         }
-        return view('checkout', ['total' => 0]);
+        return view('checkout', ['total' => 0, 'items' => ""]);
     }
 }
