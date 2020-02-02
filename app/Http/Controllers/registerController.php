@@ -12,7 +12,7 @@ class registerController extends Controller
 
     public function index()
     {
-        if (session('user') ==! null) {
+        if (session('user') !== null) {
             return view('index');
         }
         return view('register');

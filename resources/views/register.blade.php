@@ -67,7 +67,7 @@ margin-bottom:3.5rem;
                 </div>
                 @endif
 
-                @if (session('success')==!null)
+                @if (session('success')!==null)
                 <div class="col-md-12 mb-3">
                     <div class="alert alert-success">
                         <ul>

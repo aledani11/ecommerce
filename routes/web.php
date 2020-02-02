@@ -27,8 +27,8 @@ Route::post('/register', 'registerController@store')->name('register.store');
 
 Route::get('/index', 'indexController@index')->name('index');
 
-Route::get('/shop', 'shopController@index')->name('shop');
-Route::get('/shop/{id}', 'shopController@detail')->name('shop.detail');
+Route::get('shop', 'shopController@index')->name('shop');
+Route::get('shop/{room?}', 'shopController@detail')->name('shop.detail');
 
 Route::post('/cart_add', 'cartController@add')->name('cart.add');
 Route::post('/cart_get', 'cartController@getCart')->name('cart.get');
@@ -39,3 +39,28 @@ Route::get('/checkout', 'checkoutController@index')->name('checkout');
 Route::get('/logout', 'loginController@logout')->name('logout');
 
 Route::get('/activate', 'registerController@activate')->name('activate');
+/*
+Route::fallback(function () {
+    return view('error');
+});*/
+
+//ADMIN*****
+
+Route::get('/admin/login', 'login_adminController@index')->name('login_admin');
+Route::post('/admin/login', 'login_adminController@auth')->name('login_admin.auth');
+
+Route::get('/admin/register', 'register_adminController@index')->name('register_admin');
+Route::post('/admin/register', 'register_adminController@store')->name('register_admin.store');
+
+Route::get('/admin/index', 'index_adminController@index')->name('index_admin');
+
+Route::get('/logout', 'login_adminController@logout')->name('logout_admin');
+
+Route::get('/admin/users', 'users_adminController@index')->name('users_admin');
+Route::get('/admin/users/editar/{admin?}', 'users_adminController@edit')->name('users_admin.edit');
+Route::put('/admin/users/{admin?}', 'users_adminController@update')->name('users_admin.update');
+Route::get('/admin/users/anular/{admin?}', 'users_adminController@destroy')->name('users_admin.destroy');
+/*
+Route::fallback(function () {
+    return view('error_admin');
+});*/

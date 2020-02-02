@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\loginAuth;
+use App\room;
 
 class shopController extends Controller
 {
@@ -51,8 +52,9 @@ class shopController extends Controller
                             'selected' => $page]);
     }
 
-    public function detail($id){
-        $room = DB::table('rooms')
+    public function detail(room $room){
+        $id=$room->id;
+        $room1 = DB::table('rooms')
             ->select(
                 'rooms.*',
                 'rt.name as room_type'
@@ -71,7 +73,7 @@ class shopController extends Controller
 
             /*return view('detail', ['rooms' => $rooms,
                             'rooms_type' => $rooms_type]);*/
-            return view('detail', ['rooms' => $room,
+            return view('detail', ['rooms' => $room1,
                                     'characteristics'=> $charact]);
     }
   
