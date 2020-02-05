@@ -25,6 +25,8 @@ Route::post('/login', 'loginController@auth')->name('login.auth');
 Route::get('/register', 'registerController@index')->name('register');
 Route::post('/register', 'registerController@store')->name('register.store');
 
+Route::get('/profile', 'profileControler@index')->name('profile');
+
 Route::get('/index', 'indexController@index')->name('index');
 
 Route::get('shop', 'shopController@index')->name('shop');
@@ -54,7 +56,7 @@ Route::post('/admin/register', 'register_adminController@store')->name('register
 
 Route::get('/admin/index', 'index_adminController@index')->name('index_admin');
 
-Route::get('/logout', 'login_adminController@logout')->name('logout_admin');
+Route::get('/logout_admin', 'login_adminController@logout')->name('logout_admin');
 
 Route::get('/admin/users', 'users_adminController@index')->name('users_admin');
 Route::get('/admin/users/editar/{admin?}', 'users_adminController@edit')->name('users_admin.edit');

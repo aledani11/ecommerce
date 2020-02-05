@@ -22,21 +22,33 @@ class checkoutController extends Controller
                 ->leftJoin('rooms_type as rt', 'rooms.id_type', '=', 'rt.id')
                 ->get();
             $total = 0;
-            $item=[];
+            $item = [];
             foreach ($result as $key => $value) {
-                $check_in = new DateTime(session('check_in'.$result[$key]->id));
-                $check_out = new DateTime(session('check_out'.$result[$key]->id));
+                $check_in = new DateTime(session('check_in' . $result[$key]->id));
+                $check_out = new DateTime(session('check_out' . $result[$key]->id));
                 $interval = $check_in->diff($check_out);
-                $day = (int)$interval->days;
-                ($day !== 0) ?: $day=1;
-                $total += ($day * ((int)$result[$key]->price));
+                $day = (int) $interval->days;
+                ($day !== 0) ?: $day = 1;
+                $total += ($day * ((int) $result[$key]->price));
                 $item[] = array('name' => $result[$key]->title, 'unit_amount' => array('value' => $result[$key]->price, 'currency_code' => 'USD'), 'quantity' => $day);
                 //$item[$key]= "{name:'".$result[$key]->title."' ,unit_amount:{value:'".$result[$key]->price."', currency_code: 'USD'} ,quantity:'1'}";
                 //$item[]= (['name' => ''.$result[$key]->title.'', 'unit_amount' => '{value:'.''.$result[$key]->price.''.', currency_code:'.''.'USD'.''.' }','quantity'=>'1']);
                 //$item[]= (['name' => ''.$result[$key]->title.'', 'unit_amount' => '{value:'.$result[$key]->price.', currency_code:'.'USD'.' }','quantity'=>'1']);
+                if (session('user') !== null) {
+                    $data[] = [
+                        'id_room' => $value->id,
+                        'email_customer' => session('user'),
+                        'check_in' => $check_in,
+                        'check_out' => $check_out
+                    ];
+                }   
             }
-//dump($result);
-//dd(json_encode($item));
+            if (isset($data)) {
+                DB::table('cart')->where('email_customer', session('user'))->delete();
+                DB::table('cart')->insert($data);
+            }
+            //dump($result);
+            //dd(json_encode($item));
             return view('checkout', [
                 'results' => $result,
                 'total' => $total,

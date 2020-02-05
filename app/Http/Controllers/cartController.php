@@ -90,7 +90,7 @@ class cartController extends Controller
 
     public function getCart()
     {
-        if (session('cart') == !null) {
+        if (session('cart') !== null) {
             $result = null;
             $result3['count'] = 0;
             foreach (session('cart') as $key => $value) {

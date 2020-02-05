@@ -200,7 +200,7 @@
                                     <!-- Product Description -->
                                     <div class="product-description">
                                         <span>{{$result->room_type}}</span>
-                                        <a href="{{route('shop.detail',['id'=>"$result->id"])}}">
+                                        <a href="{{route('shop.detail',["$result->id"])}}">
                                             <h6>{{$result->title}}</h6>
                                         </a>
                                         <p class="product-price">${{$result->price}}</p>

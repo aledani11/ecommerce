@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\Hash;
 class register_adminController extends Controller
 {
 
+    function auth()
+    {
+        if (session('s_admin') !== null) {
+            return true;
+        }
+        return false;
+    }
+
     public function index()
     {
         if (session('user') !== null) {
@@ -26,6 +34,10 @@ class register_adminController extends Controller
 
     public function store(register_adminStore $request)
     {
+
+        if (!$this->auth()) {
+            return redirect()->route('login_admin');
+        }
 
         $id = DB::table('admins')->insertGetId(
             [

@@ -94,10 +94,10 @@
                                 </ul>
                             </li>
                             <li><a href="contact.html">Contacto</a></li>
-                            <li><a href="{{ route('register') }}">Registarse</a></li>
-                            @if (session('user') ==!null)
+                            @if (session('user') !== null)
                             <li><a href="{{ route('logout') }}">Cerrar Sesión</a></li>
                             @else
+                            <li><a href="{{ route('register') }}">Registarse</a></li>
                             <li><a href="{{ route('login') }}">Iniciar Sesión</a></li>
                             @endif
                         </ul>
@@ -120,9 +120,11 @@
                     <a href="#"><img src="/img/core-img/heart.svg" alt=""></a>
                 </div>
                 <!-- User Login Info -->
+                @if (session('user') !== null)
                 <div class="user-login-info">
-                    <a href="{{ route('login') }}"><img src="/img/core-img/user.svg" alt=""></a>
+                    <a href="{{ route('profile') }}"><img src="/img/core-img/user.svg" alt=""></a>
                 </div>
+                @endif
                 <!-- Cart Area -->
                 <div class="cart-area">
                     <a href="#" id="essenceCartBtn"><img src="/img/core-img/bag.svg" alt=""> <span id="nro_cart"></span></a>
