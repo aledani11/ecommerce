@@ -40,13 +40,22 @@
             // This function captures the funds from the transaction.
             return actions.order.capture().then(function(details) {
                 // This function shows a transaction success message to your buyer.
-                alert('Transaction completed by ' + details.payer.name.given_name);
-                console.log(details.id);
-                console.log(details.payer.name.given_name);
-                console.log(details.payer.name.surname);
-                console.log(details.payer.email_address);
-                //console.log(details.purchase_units.payments.captures.amount);
-              //  console.log(details.purchase_units);
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "{{route('checkout.payment')}}",
+                    method: "POST",
+                    data: {
+                        id: details.id,
+                        email: details.payer.email_address
+                    },
+                    success: function(data) {
+                        data === "completed" ? window.location.replace("{{route('profile')}}"):alert("Error al redireccionar");
+                    }
+                })
             });
         }
     }).render('#paypal-button-container')
@@ -110,7 +119,7 @@ margin-bottom: 10px;
                         $check_out = new DateTime(session('check_out'.$result->id));
                         $interval = $check_in->diff($check_out);
                         $day = (int)$interval->days;
-                        ($day !== 0)?:$day=1; 
+                        ($day !== 0)?:$day=1;
                         @endphp
                         <li><span>{{$day}} {{($day==1)?"Dia":"Dias"}} - ${{($day*((int)$result->price))}}</span><span>{{$result->title}}</span></li>
                         @endforeach

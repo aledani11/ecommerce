@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class registerStore extends FormRequest
+class profileUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +26,8 @@ class registerStore extends FormRequest
         return [
             'name' => 'required|max:50|alpha',
             'lastname' => 'required|max:50|alpha',
-            'email' => 'required|unique:customer|max:100|email:rfc,dns',
             'direccion' => 'nullable|max:100',
-            'pass' => 'required|confirmed|max:100|min:8|alpha_dash',
+            'pass' => 'nullable|confirmed|max:100|min:8|alpha_dash',
             'tel' => 'required|max:100|alpha_dash',
         ];
     }
@@ -36,7 +35,7 @@ class registerStore extends FormRequest
     public function attributes()
     {
         return [
-            'email' => 'correo electronico',
+            'nya' => 'nombre y apellido',
             'name' => 'nombre',
             'lastname' => 'apellido',
             'pass' => 'contraseña',
@@ -49,7 +48,6 @@ class registerStore extends FormRequest
         return [
             'name.required' => 'Ingrese :attribute',
             'lastname.required' => 'Ingrese :attribute',
-            'email.required' => 'Ingrese :attribute',
             'pass.required' => 'Ingrese :attribute',
             'tel.required' => 'Ingrese :attribute',
             'name.alpha' => 'El :attribute solo puede contener letras.',
@@ -58,9 +56,6 @@ class registerStore extends FormRequest
             'tel.alpha_dash' => 'El :attribute solo puede contener letras, números, guiones y guiones bajos.',
             'name.max' => 'En campo :attribute debe contener menos caracteres',
             'lastname.max' => 'En campo :attribute debe contener menos caracteres',
-            'email.unique'  => ':attribute ya registrado',
-            'email.max'  => 'El :attribute debe contener menos caracteres',
-            'email.email'  => 'El :attribute no es valido',
             'direccion.max'  => 'El :attribute debe contener menos caracteres',
             'pass.confirmed'  => 'Las contraseñas no coinciden',
             'pass.max'  => 'La :attribute es demasiado larga',

@@ -26,6 +26,8 @@ Route::get('/register', 'registerController@index')->name('register');
 Route::post('/register', 'registerController@store')->name('register.store');
 
 Route::get('/profile', 'profileControler@index')->name('profile');
+Route::get('/profile/editar/', 'profileControler@edit')->name('profile.edit');
+Route::put('/profile/{customer?}', 'profileControler@update')->name('profile.update');
 
 Route::get('/index', 'indexController@index')->name('index');
 
@@ -37,6 +39,7 @@ Route::post('/cart_get', 'cartController@getCart')->name('cart.get');
 Route::post('/cart_delete', 'cartController@delete')->name('cart.delete');
 
 Route::get('/checkout', 'checkoutController@index')->name('checkout');
+Route::post('/payment', 'checkoutController@payment')->name('checkout.payment');
 
 Route::get('/logout', 'loginController@logout')->name('logout');
 

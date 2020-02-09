@@ -33,7 +33,7 @@ class cartController extends Controller
         // if (session('user') ==! null) {
         //return view('shop');
         //  return"good done!";
-        //} else {
+        //} else {z
         if (session('cart') !== null) {
             if (in_array(request()->id, session('cart'), true)) {
                 return "<div class='alert alert-danger'>

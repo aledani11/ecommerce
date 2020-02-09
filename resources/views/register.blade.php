@@ -10,7 +10,7 @@
 @section('link')
 @endsection
 
-@section('title','Login')
+@section('title','Register')
 
 @section('script')
 @endsection
@@ -79,8 +79,12 @@ margin-bottom:3.5rem;
                 @endif
 
                 <div class="col-md-12 mb-3">
-                    <label for="nya">Nombre y Apellido</label>
-                    <input type="text" class="form-control @error('nya') is-invalid @enderror" id="nya" name="nya" value="{{ old('nya') }}" required>
+                    <label for="nya">Nombre</label>
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label for="nya">Apellido</label>
+                    <input type="text" class="form-control @error('lastname') is-invalid @enderror" id="lastname" name="lastname" value="{{ old('lastname') }}" required>
                 </div>
                 <div class="col-md-12 mb-3">
                     <label for="tel">Telefono</label>
