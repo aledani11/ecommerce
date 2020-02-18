@@ -41,7 +41,7 @@ class register_adminController extends Controller
 
         $id = DB::table('admins')->insertGetId(
             [
-                'name' => request()->nya, 'email' => request()->email,
+                'name' => request()->name." ".request()->lastname, 'email' => request()->email,
                 'password' => Hash::make(request()->pass),
                 'created' => now()
             ]

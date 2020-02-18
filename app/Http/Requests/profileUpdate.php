@@ -35,7 +35,7 @@ class profileUpdate extends FormRequest
     public function attributes()
     {
         return [
-            'nya' => 'nombre y apellido',
+            'direccion' => 'dirección',
             'name' => 'nombre',
             'lastname' => 'apellido',
             'pass' => 'contraseña',
@@ -56,7 +56,7 @@ class profileUpdate extends FormRequest
             'tel.alpha_dash' => 'El :attribute solo puede contener letras, números, guiones y guiones bajos.',
             'name.max' => 'En campo :attribute debe contener menos caracteres',
             'lastname.max' => 'En campo :attribute debe contener menos caracteres',
-            'direccion.max'  => 'El :attribute debe contener menos caracteres',
+            'direccion.max'  => 'La :attribute debe contener menos caracteres',
             'pass.confirmed'  => 'Las contraseñas no coinciden',
             'pass.max'  => 'La :attribute es demasiado larga',
             'pass.min'  => 'La :attribute debe contener mas de 8 caracteres',

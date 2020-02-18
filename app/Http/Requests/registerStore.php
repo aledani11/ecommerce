@@ -39,6 +39,7 @@ class registerStore extends FormRequest
             'email' => 'correo electronico',
             'name' => 'nombre',
             'lastname' => 'apellido',
+            'direccion' => 'dirección',
             'pass' => 'contraseña',
             'tel' => 'telefono',
         ];
@@ -61,7 +62,7 @@ class registerStore extends FormRequest
             'email.unique'  => ':attribute ya registrado',
             'email.max'  => 'El :attribute debe contener menos caracteres',
             'email.email'  => 'El :attribute no es valido',
-            'direccion.max'  => 'El :attribute debe contener menos caracteres',
+            'direccion.max'  => 'La :attribute debe contener menos caracteres',
             'pass.confirmed'  => 'Las contraseñas no coinciden',
             'pass.max'  => 'La :attribute es demasiado larga',
             'pass.min'  => 'La :attribute debe contener mas de 8 caracteres',

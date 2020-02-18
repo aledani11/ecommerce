@@ -190,11 +190,11 @@
                         @foreach($results as $result)
 
                             <!-- Single Product -->
-                            <div class="col-12 col-sm-6 col-lg-4">
+                            <div class="col-12 col-sm-6 col-lg-4" style="margin-top:auto">
                                 <div class="single-product-wrapper">
                                     <!-- Product Image -->
                                     <div class="product-img">
-                                        <img src="img/product-img/individual.jpg" alt="">                                        
+                                        <img src="img/product-img/{{$result->photo}}" alt="">                                        
                                     </div>
 
                                     <!-- Product Description -->

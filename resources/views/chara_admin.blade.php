@@ -13,13 +13,12 @@
 <!-- Page level plugins -->
 <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
 <!-- Page level custom scripts -->
 <script src="/js_admin/demo/datatables-demo.js"></script>
 <script>
   function message() {
-        return confirm('Desea eliminar el registro');
-    }
+    return confirm('Desea eliminar el registro');
+  }
 </script>
 @endsection
 
@@ -31,7 +30,7 @@
 <div class="container-fluid">
 
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">Usuarios</h1>
+  <h1 class="h3 mb-2 text-gray-800">Caracteristicas</h1>
   @if (session('success')!==null)
   <div class="col-md-12 mb-3">
     <div class="alert alert-success">
@@ -44,7 +43,7 @@
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">Usuarios</h6>
+      <h6 class="m-0 font-weight-bold text-primary">Caracteristicas</h6>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -53,9 +52,6 @@
             <tr>
               <th>Id</th>
               <th>Nombre</th>
-              <th>Email</th>
-              <th>Nivel</th>
-              <th>Estado</th>
               <th>Editar</th>
               <th>Eliminar</th>
             </tr>
@@ -64,9 +60,6 @@
             <tr>
               <th>Id</th>
               <th>Nombre</th>
-              <th>Email</th>
-              <th>Nivel</th>
-              <th>Estado</th>
               <th>Editar</th>
               <th>Eliminar</th>
             </tr>
@@ -76,11 +69,8 @@
             <tr>
               <td>{{$result->id}}</td>
               <td>{{$result->name}}</td>
-              <td>{{$result->email}}</td>
-              <td>{{$result->level == 0?"Admin":"Super Admin"}}</td>
-              <td>{{$result->status == 0?"Inactivo":"Activo"}}</td>
-              <td><a href="{{route('users_admin.edit',[$result->id])}}">Editar</a></td>
-              <td><a onclick="return message()" href="{{route('users_admin.destroy',[$result->id])}}">Eliminar</a></td>
+              <td><a href="{{route('chara_admin.edit',[$result->id])}}">Editar</a></td>
+              <td><a onclick="return message()" href="{{route('chara_admin.destroy',[$result->id])}}">Eliminar</a></td>
             </tr>
             @endforeach
           </tbody>

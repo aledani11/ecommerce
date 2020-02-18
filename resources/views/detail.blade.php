@@ -25,8 +25,8 @@
     <!-- Single Product Thumb -->
     <div class="single_product_thumb clearfix">
         <div class="product_thumbnail_slides owl-carousel">
-            <img src="/img/product-img/individual.jpg" alt="">
-            <img src="/img/product-img/individual.jpg" alt="">
+            <img src="/img/product-img/{{$rooms[0]->photo}}" alt="">
+            <img src="/img/product-img/{{$rooms[0]->photo1}}" alt="">
         </div>
     </div>
     <!-- Single Product Description -->

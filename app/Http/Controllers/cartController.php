@@ -12,6 +12,22 @@ class cartController extends Controller
 
     public function add()
     {
+        list($y, $m, $d) = array_pad(explode('-', request()->c_in, 3), 3, 0);
+        list($y1, $m1, $d1) = array_pad(explode('-', request()->c_out, 3), 3, 0);
+        if (!ctype_digit("$y$m$d") || !ctype_digit("$y1$m1$d1")){
+            return "<div class='alert alert-danger'>
+            <ul>
+                <li>Fecha no valida</li>
+            </ul>
+            </div>";
+        }
+        if (!checkdate($m, $d, $y) || !checkdate($m1, $d1, $y1)){
+            return "<div class='alert alert-danger'>
+            <ul>
+                <li>Fecha no valida</li>
+            </ul>
+            </div>";
+        }
         //request()->session()->flush();
         // request()->session()->forget('cart',"2");
         //  request()->session()->pull('cart',2);

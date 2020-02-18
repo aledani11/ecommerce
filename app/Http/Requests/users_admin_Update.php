@@ -24,7 +24,8 @@ class users_admin_Update extends FormRequest
     public function rules()
     {
         return [
-            'nya' => 'required|max:100|alpha_dash',
+            'name' => 'required|max:50|alpha',
+            'lastname' => 'required|max:50|alpha',
             'pass' => 'nullable|confirmed|max:100|min:8|alpha_dash',
             'estado' => ['required', function ($attribute, $value, $fail) {
                 if ($value!=='1' && $value!=='0') {
@@ -42,7 +43,8 @@ class users_admin_Update extends FormRequest
     public function attributes()
     {
         return [
-            'nya' => 'nombre y apellido',
+            'name' => 'nombre',
+            'lastname' => 'apellido',
             'pass' => 'contraseña',
             'estado' => 'estado',
             'nivel' => 'nivel',
@@ -52,13 +54,16 @@ class users_admin_Update extends FormRequest
     public function messages()
     {
         return [
-            'nya.required' => 'Ingrese :attribute',
+            'name.required' => 'Ingrese :attribute',
+            'lastname.required' => 'Ingrese :attribute',
             'pass.required' => 'Ingrese :attribute',
             'estado.required' => 'Ingrese :attribute',
             'nivel.required' => 'Ingrese :attribute',
-            'nya.alpha_dash' => 'El :attribute solo puede contener letras, números, guiones y guiones bajos.',
+            'name.alpha' => 'El :attribute solo puede contener letras.',
+            'lastname.alpha' => 'El :attribute solo puede contener letras.',
             'pass.alpha_dash' => 'La :attribute solo puede contener letras, números, guiones y guiones bajos.',
-            'nya.max' => 'En campo :attribute debe contener menos caracteres',
+            'name.max' => 'En campo :attribute debe contener menos caracteres',
+            'lastname.max' => 'En campo :attribute debe contener menos caracteres',
             'pass.confirmed'  => 'Las contraseñas no coinciden',
             'pass.max'  => 'La :attribute es demasiado larga',
             'pass.min'  => 'La :attribute debe contener mas de 8 caracteres',

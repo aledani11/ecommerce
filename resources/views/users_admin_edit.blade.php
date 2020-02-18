@@ -56,8 +56,11 @@ function check_pass() {
               @csrf
               @method('PUT')
               <div class="form-group">
-                <input type="text" class="form-control form-control-user @error('nya') is-invalid @enderror" id="nya" placeholder="Nombre y Apellido" name="nya" value="{{$results[0]->name}}" required>
-              </div>
+                    <input type="text" placeholder="Nombre" class="form-control form-control-user @error('name') is-invalid @enderror" id="name" name="name" value='{{explode(" ",$results[0]->name)[0]}}' required>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Apellido" class="form-control form-control-user @error('lastname') is-invalid @enderror" id="lastname" name="lastname" value='{{explode(" ",$results[0]->name)[1]}}' required>
+                </div>
               <div class="form-group">
                 <input type="email" class="form-control form-control-user @error('email') is-invalid @enderror" id="email" placeholder="Email" name="email" value="{{$results[0]->email}}" readonly>
               </div>

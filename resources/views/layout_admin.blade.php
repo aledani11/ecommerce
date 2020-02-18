@@ -71,19 +71,24 @@
         </div>
       </li>
 
-      <!-- Nav Item - Utilities Collapse Menu -->
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Ventas
+      </div>
+
+      <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-fw fa-wrench"></i>
-          <span>Utilities</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Reservas</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+        <div id="collapse1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="utilities-color.html">Colors</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
+            <h6 class="collapse-header">Administrar reservas:</h6>
+            <a class="collapse-item" href="{{route('ventas_admin')}}">Reservas</a>
           </div>
         </div>
       </li>
@@ -93,41 +98,49 @@
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        Addons
+        Habitaciones
       </div>
 
-      <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
+          <span>Habitaciones</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-            <div class="collapse-divider"></div>
-            <h6 class="collapse-header">Other Pages:</h6>
-            <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item" href="blank.html">Blank Page</a>
+            <h6 class="collapse-header">Administrar habitaciones:</h6>
+            <a class="collapse-item" href="{{route('rooms_admin.index')}}">Habitaciones</a>
+            <a class="collapse-item" href="{{route('rooms_admin.create')}}">Agregar</a>
           </div>
         </div>
       </li>
 
-      <!-- Nav Item - Charts -->
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Tipos de habitaciones</span>
+        </a>
+        <div id="collapse3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Tipo de habitaciones:</h6>
+            <a class="collapse-item" href="{{route('roomstype_admin.index')}}">Tipos</a>
+            <a class="collapse-item" href="{{route('roomstype_admin.create')}}">Agregar</a>
+          </div>
+        </div>
       </li>
 
-      <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse4" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Caracteristicas</span>
+        </a>
+        <div id="collapse4" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Caracteristicas:</h6>
+            <a class="collapse-item" href="{{route('chara_admin.index')}}">Caracteristicas</a>
+            <a class="collapse-item" href="{{route('chara_admin.create')}}">Agregar</a>
+          </div>
+        </div>
       </li>
 
       <!-- Divider -->

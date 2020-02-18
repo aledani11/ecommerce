@@ -26,7 +26,7 @@ Route::get('/register', 'registerController@index')->name('register');
 Route::post('/register', 'registerController@store')->name('register.store');
 
 Route::get('/profile', 'profileControler@index')->name('profile');
-Route::get('/profile/editar/', 'profileControler@edit')->name('profile.edit');
+Route::get('/profile/edit/', 'profileControler@edit')->name('profile.edit');
 Route::put('/profile/{customer?}', 'profileControler@update')->name('profile.update');
 
 Route::get('/index', 'indexController@index')->name('index');
@@ -62,10 +62,29 @@ Route::get('/admin/index', 'index_adminController@index')->name('index_admin');
 Route::get('/logout_admin', 'login_adminController@logout')->name('logout_admin');
 
 Route::get('/admin/users', 'users_adminController@index')->name('users_admin');
-Route::get('/admin/users/editar/{admin?}', 'users_adminController@edit')->name('users_admin.edit');
+Route::get('/admin/users/edit/{admin?}', 'users_adminController@edit')->name('users_admin.edit');
 Route::put('/admin/users/{admin?}', 'users_adminController@update')->name('users_admin.update');
-Route::get('/admin/users/anular/{admin?}', 'users_adminController@destroy')->name('users_admin.destroy');
-/*
-Route::fallback(function () {
-    return view('error_admin');
-});*/
+Route::get('/admin/users/remove/{admin?}', 'users_adminController@destroy')->name('users_admin.destroy');
+
+Route::get('/admin/ventas', 'ventas_adminController@index')->name('ventas_admin');
+
+Route::get('/admin/rooms', 'rooms_adminController@index')->name('rooms_admin.index');
+Route::get('/admin/rooms/add', 'rooms_adminController@create')->name('rooms_admin.create');
+Route::post('/admin/rooms/add', 'rooms_adminController@store')->name('rooms_admin.store');
+Route::get('/admin/rooms/edit/{room?}', 'rooms_adminController@edit')->name('rooms_admin.edit');
+Route::put('/admin/rooms/{room?}', 'rooms_adminController@update')->name('rooms_admin.update');
+Route::get('/admin/rooms/remove/{room?}', 'rooms_adminController@destroy')->name('rooms_admin.destroy');
+
+Route::get('/admin/rooms_type', 'roomstype_adminController@index')->name('roomstype_admin.index');
+Route::get('/admin/rooms_type/add', 'roomstype_adminController@create')->name('roomstype_admin.create');
+Route::post('/admin/rooms_type/add', 'roomstype_adminController@store')->name('roomstype_admin.store');
+Route::get('/admin/rooms_type/edit/{rooms_type?}', 'roomstype_adminController@edit')->name('roomstype_admin.edit');
+Route::put('/admin/rooms_type/{rooms_type?}', 'roomstype_adminController@update')->name('roomstype_admin.update');
+Route::get('/admin/rooms_type/remove/{rooms_type?}', 'roomstype_adminController@destroy')->name('roomstype_admin.destroy');
+
+Route::get('/admin/chara', 'chara_adminController@index')->name('chara_admin.index');
+Route::get('/admin/chara/add', 'chara_adminController@create')->name('chara_admin.create');
+Route::post('/admin/chara/add', 'chara_adminController@store')->name('chara_admin.store');
+Route::get('/admin/chara/edit/{characteristics?}', 'chara_adminController@edit')->name('chara_admin.edit');
+Route::put('/admin/chara/{characteristics?}', 'chara_adminController@update')->name('chara_admin.update');
+Route::get('/admin/chara/remove/{characteristics?}', 'chara_adminController@destroy')->name('chara_admin.destroy');

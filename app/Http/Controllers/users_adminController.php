@@ -61,7 +61,7 @@ class users_adminController extends Controller
             ->where('id', $id)
             ->update(
                 [
-                    'name' => request()->nya, 'created' => now(),
+                    'name' => request()->name." ".request()->lastname, 'created' => now(),
                     'status' => request()->estado, 'level' => request()->nivel
                 ]
             );

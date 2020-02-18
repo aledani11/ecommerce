@@ -24,7 +24,8 @@ class register_adminStore extends FormRequest
     public function rules()
     {
         return [
-            'nya' => 'required|max:100|alpha_dash',
+            'name' => 'required|max:50|alpha',
+            'lastname' => 'required|max:50|alpha',
             'email' => 'required|unique:admins|max:100|email:rfc,dns',
             'pass' => 'required|confirmed|max:100|min:8|alpha_dash',
         ];
@@ -34,7 +35,8 @@ class register_adminStore extends FormRequest
     {
         return [
             'email' => 'correo electronico',
-            'nya' => 'nombre y apellido',
+            'name' => 'nombre',
+            'lastname' => 'apellido',
             'pass' => 'contraseña',
         ];
     }
@@ -42,12 +44,15 @@ class register_adminStore extends FormRequest
     public function messages()
     {
         return [
-            'nya.required' => 'Ingrese :attribute',
+            'name.required' => 'Ingrese :attribute',
+            'lastname.required' => 'Ingrese :attribute',
             'email.required' => 'Ingrese :attribute',
             'pass.required' => 'Ingrese :attribute',
-            'nya.alpha_dash' => 'El :attribute solo puede contener letras, números, guiones y guiones bajos.',
+            'name.alpha' => 'El :attribute solo puede contener letras.',
+            'lastname.alpha' => 'El :attribute solo puede contener letras.',
             'pass.alpha_dash' => 'La :attribute solo puede contener letras, números, guiones y guiones bajos.',
-            'nya.max' => 'En campo :attribute debe contener menos caracteres',
+            'name.max' => 'En campo :attribute debe contener menos caracteres',
+            'lastname.max' => 'En campo :attribute debe contener menos caracteres',
             'email.unique'  => ':attribute ya registrado',
             'email.max'  => 'El :attribute debe contener menos caracteres',
             'email.email'  => 'El :attribute no es valido',

@@ -42,8 +42,11 @@
             <form method="POST" class="user" id="form_login" action="{{route('register_admin.store')}}">
               @csrf
               <div class="form-group">
-                <input type="text" class="form-control form-control-user @error('nya') is-invalid @enderror" id="nya" placeholder="Nombre y Apellido" name="nya" value="{{ old('nya') }}" required>
-              </div>
+                    <input type="text" placeholder="Nombre" class="form-control form-control-user @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Apellido" class="form-control form-control-user @error('lastname') is-invalid @enderror" id="lastname" name="lastname" value="{{ old('lastname') }}" required>
+                </div>
               <div class="form-group">
                 <input type="email" class="form-control form-control-user @error('email') is-invalid @enderror" id="email" placeholder="Email" name="email" value="{{ old('email') }}" required>
               </div>
@@ -56,13 +59,10 @@
                 </div>
               </div>
               <button type="submit" class="btn btn-primary btn-user btn-block">
-                Registrarse
+                Registrar
               </button>
             </form>
             <hr>
-            <div class="text-center">
-              <a class="small" href="{{route('login_admin')}}">¿Ya tienes una cuenta?</a>
-            </div>
           </div>
         </div>
       </div>

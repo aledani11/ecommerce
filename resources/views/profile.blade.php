@@ -33,6 +33,9 @@ letter-spacing: 1.5px;
 text-transform: uppercase;
 margin-bottom: 10px;
 }
+table#dataTable tr{
+    text-align:center;
+  }
 @endsection
 
 @section('content')
