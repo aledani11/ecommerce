@@ -39,7 +39,7 @@ class loginController extends Controller
         if(session('cart') !== null){
             return redirect()->route('checkout');
         }
-        return view('index');
+        return redirect()->route('index');
     }
 
     public function logout(request $request){

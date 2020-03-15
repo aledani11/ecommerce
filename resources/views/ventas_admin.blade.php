@@ -16,12 +16,16 @@
 
 <!-- Page level custom scripts -->
 <script src="/js_admin/demo/datatables-demo.js"></script>
+<script>
+  var table = $('#dataTable').DataTable();
+  table.columns( 0 ).search( "{{ $id ?? '' }}" ).draw();
+</script>
 @endsection
 
 @section('style')
 <style>
-  table#dataTable tr{
-    text-align:center;
+  table#dataTable tr {
+    text-align: center;
   }
 </style>
 @endsection
@@ -39,7 +43,7 @@
     </div>
     <div class="card-body">
       <div class="table-responsive">
-        <table data-order='[[ 0, "desc" ]]'  class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <table data-order='[[ 0, "desc" ]]' class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
           <thead class="thead-light">
             <tr>
               <th>Id</th>
@@ -77,57 +81,57 @@
 @foreach($sales as $sale)
 <!-- The Modal -->
 <div class="modal fade" id="detail{{$sale->id}}">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
 
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Detalle</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Detalle</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
 
-            <!-- Modal body -->
-            <div class="modal-body table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>Habitación</th>
-                            <th>Check in</th>
-                            <th>Check out</th>
-                            <th>Dias</th>
-                            <th>Precio</th>
-                            <th>Subtotal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($details[$sale->id] as $detail)
-                        <tr>
-                            <td>{{$detail->title}}</td>
-                            <td>{{ \Carbon\Carbon::parse($detail->check_in)->format('d/m/Y')}}</td>
-                            <td>{{ \Carbon\Carbon::parse($detail->check_out)->format('d/m/Y')}}</td>
-                            <td>{{$detail->days}}</td>
-                            <td>{{$detail->price}}</td>
-                            <td>{{$detail->total}}</td>
-                        </tr>
-                        @endforeach
-                        <tr>
-                            <th colspan="5" style="text-align:right">Total</th>
-                            <td>${{$totals[$sale->id]}}</td>
-                        </tr>
-                        @if($details == null)
-                        <td colspan="4" style="text-align:center">No se encontraron registros</td>
-                        @endif
-                    </tbody>
-                </table>
-            </div>
+      <!-- Modal body -->
+      <div class="modal-body table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead class="thead-light">
+            <tr>
+              <th>Habitación</th>
+              <th>Check in</th>
+              <th>Check out</th>
+              <th>Dias</th>
+              <th>Precio</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($details[$sale->id] as $detail)
+            <tr>
+              <td>{{$detail->title}}</td>
+              <td>{{ \Carbon\Carbon::parse($detail->check_in)->format('d/m/Y')}}</td>
+              <td>{{ \Carbon\Carbon::parse($detail->check_out)->format('d/m/Y')}}</td>
+              <td>{{$detail->days}}</td>
+              <td>{{number_format($detail->price,0,'','.')}}</td>
+              <td>{{number_format($detail->total,0,'','.')}}</td>
+            </tr>
+            @endforeach
+            <tr>
+              <th colspan="5" style="text-align:right">Total</th>
+              <td>{{number_format($totals[$sale->id],0,'','.')}}</td>
+            </tr>
+            @if($details == null)
+            <td colspan="4" style="text-align:center">No se encontraron registros</td>
+            @endif
+          </tbody>
+        </table>
+      </div>
 
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-            </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+      </div>
 
-        </div>
     </div>
+  </div>
 </div>
 @endforeach
 @endisset

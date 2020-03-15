@@ -15,10 +15,10 @@ class login_adminController extends Controller
         //dump(session()->get('user'));
         //dump(session('user'));
         if (session('user') !== null) {
-            return view('index');
+            return redirect()->route('index');
         }
         if (session('admin') !== null || session('s_admin') !== null) {
-            return view('index_admin');
+            return redirect()->route('index_admin');
         }
         return view('login_admin');
     }
@@ -36,13 +36,16 @@ class login_adminController extends Controller
                 $request->session()->put('s_admin', request()->email);
             }
         }
-        return view('index_admin');
+        return redirect()->route('index_admin');
     }
 
     public function logout(request $request)
     {
         $request->session()->forget('admin');
         $request->session()->forget('s_admin');
+        if (session('user') !== null) {
+            return redirect()->route('index');
+        }
         return view('login_admin');
     }
 }

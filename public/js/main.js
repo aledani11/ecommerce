@@ -42,6 +42,7 @@ function getCart() {
         success: function (data) {
             $("#cart_details").html(data.details);
             $("#nro_cart").html(data.count);
+            $("#summary-table").html(data.summary);
             //alert(data);
         }
     });

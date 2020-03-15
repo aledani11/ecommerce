@@ -2,9 +2,7 @@
 
 @section('meta')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
-<meta name="description" content="Buy LG 34WN80C-B 34 inch 21:9 Curved UltraWide WQHD IPS Monitor with USB Type-C Connectivity sRGB 99% Color Gamut and HDR10 Compatibility, Black (2019): Everything Else - Amazon.com ✓ FREE DELIVERY possible on eligible purchases" />
-<meta name="title" content="Amazon.com: LG 34WN80C-B 34 inch 21:9 Curved UltraWide WQHD IPS Monitor with USB Type-C Connectivity sRGB 99% Color Gamut and HDR10 Compatibility, Black (2019): Computers &amp; Accessories" />
-<meta name="keywords" content="LG 34WN80C-B 34 inch 21:9 Curved UltraWide WQHD IPS Monitor with USB Type-C Connectivity sRGB 99% Color Gamut and HDR10 Compatibility, Black (2019),LG,34WN80C-B" />
+<meta name="description" content="check out" />
 @endsection
 
 @section('link')
@@ -121,27 +119,11 @@ margin-bottom: 10px;
                         $day = (int)$interval->days;
                         ($day !== 0)?:$day=1;
                         @endphp
-                        <li><span>{{$day}} {{($day==1)?"Dia":"Dias"}} - ${{($day*((int)$result->price))}}</span><span>{{$result->title}}</span></li>
+                        <li><span>{{$day}} {{($day==1)?"Dia":"Dias"}} - ${{number_format(($day*((int)$result->price)),0,'','.')}}</span><span>{{$result->title}}</span></li>
                         @endforeach
                         @endisset
-                        <li><span>Total</span> <span>${{$total}}</span></li>
+                        <li><span>Total</span> <span>${{number_format($total,0,'','.')}}</span></li>
                     </ul>
-
-                    <div id="accordion" role="tablist" class="mb-4">
-                        <div class="card">
-                            <div class="card-header" role="tab" id="headingOne">
-                                <h6 class="mb-0">
-                                    <a data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne"><i class="fa fa-circle-o mr-3"></i>Paypal</a>
-                                </h6>
-                            </div>
-
-                            <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
-                                <div class="card-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra tempor so dales. Phasellus sagittis auctor gravida. Integ er bibendum sodales arcu id te mpus. Ut consectetur lacus.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     @if (session('user') === null)
                     Necesita <a class="link_" href="{{route('login')}}">iniciar sesión</a> para pagar.
                     @else

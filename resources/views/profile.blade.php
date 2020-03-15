@@ -163,13 +163,13 @@ table#dataTable tr{
                             <td>{{ \Carbon\Carbon::parse($detail->check_in)->format('d/m/Y')}}</td>
                             <td>{{ \Carbon\Carbon::parse($detail->check_out)->format('d/m/Y')}}</td>
                             <td>{{$detail->days}}</td>
-                            <td>{{$detail->price}}</td>
-                            <td>{{$detail->total}}</td>
+                            <td>{{number_format($detail->price,0,'','.')}}</td>
+                            <td>{{number_format($detail->total,0,'','.')}}</td>
                         </tr>
                         @endforeach
                         <tr>
                             <th colspan="5" style="text-align:right">Total</th>
-                            <td>{{$totals[$sale->id]}}</td>
+                            <td>{{number_format($totals[$sale->id],0,'','.')}}</td>
                         </tr>
                         @if($details == null)
                         <td colspan="4" style="text-align:center">No se encontraron registros</td>

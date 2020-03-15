@@ -56,7 +56,8 @@ class ventas_adminController extends Controller
         return view('ventas_admin', [
             'sales' => $sales,
             'details' => $details,
-            'totals' => $totals
+            'totals' => $totals,
+            'id' => request()->id
         ]);
     }
 }

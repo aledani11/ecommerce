@@ -83,7 +83,7 @@ class rooms_adminController extends Controller
     }
 
     public function edit(room $room)
-    {z
+    {
         $id = $room->id;
         if (!$this->auth()) {
             return redirect()->route('login_admin');
@@ -173,8 +173,15 @@ class rooms_adminController extends Controller
 
         $id = $room->id;
 
-        DB::table('room_characteristics')->where('id_room', $id)->delete();
-        DB::table('rooms')->where('id', $id)->delete();
+        try {
+
+            DB::table('room_characteristics')->where('id_room', $id)->delete();
+            DB::table('rooms')->where('id', $id)->delete();
+        } catch (\Exception $e) {
+            request()->session()->flash('error_', $e->getMessage());
+
+            return redirect()->route('rooms_admin.index');
+        }
 
         request()->session()->flash('success', 'Habitación eliminada con éxito!');
 

@@ -31,6 +31,8 @@ Route::put('/profile/{customer?}', 'profileControler@update')->name('profile.upd
 
 Route::get('/index', 'indexController@index')->name('index');
 
+Route::post('search', 'searchController@search')->name('search');
+
 Route::get('shop', 'shopController@index')->name('shop');
 Route::get('shop/{room?}', 'shopController@detail')->name('shop.detail');
 
@@ -88,3 +90,12 @@ Route::post('/admin/chara/add', 'chara_adminController@store')->name('chara_admi
 Route::get('/admin/chara/edit/{characteristics?}', 'chara_adminController@edit')->name('chara_admin.edit');
 Route::put('/admin/chara/{characteristics?}', 'chara_adminController@update')->name('chara_admin.update');
 Route::get('/admin/chara/remove/{characteristics?}', 'chara_adminController@destroy')->name('chara_admin.destroy');
+
+Route::get('/admin/image/add', 'page_adminController@create_image')->name('image.create');
+Route::post('/admin/image/add', 'page_adminController@store_image')->name('image.store');
+
+Route::get('/admin/recommended/add', 'page_adminController@create_recommended')->name('recommended.create');
+Route::post('/admin/recommended/add', 'page_adminController@store_recommended')->name('recommended.store');
+
+Route::get('/admin/calendar', 'calendar_adminController@index')->name('calendar.index');
+Route::post('/admin/calendar', 'calendar_adminController@index_')->name('calendar.index_');

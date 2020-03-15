@@ -5,12 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="e-commerce site well design with responsive view." />
-    <meta name="keywords" content="Electro Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <meta name="description" content="Free One-Day Delivery on millions of items with Prime. Low prices across earth's biggest selection of books, music, DVDs, electronics, computers, software, apparel & accessories, shoes, jewelry, tools & hardware, housewares, furniture, sporting goods, beauty & personal care, groceries & just about anything else.">
-    <meta name="keywords" content="Amazon, Amazon.com, Books, Online Shopping, Book Store, Magazine, Subscription, Music, CDs, DVDs, Videos, Electronics, Video Games, Computers, Cell Phones, Toys, Games, Apparel, Accessories, Shoes, Jewelry, Watches, Office Products, Sports & Outdoors, Sporting Goods, Baby Products, Health, Personal Care, Beauty, Home, Garden, Bed & Bath, Furniture, Tools, Hardware, Vacuums, Outdoor Living, Automotive Parts, Pet Supplies, Broadband, DSL">
-
-    <meta name="description" content="Compra y vende artículos electrónicos, autos, ropa, objetos de colección, artículos deportivos, cámaras digitales, artículos para bebé, cupones y muchos artículos más en eBay, la plataforma mundial de comercio electrónico" />
+    <meta name="description" content="e-commerce site" />
+    <meta name="description" content="reserva de habitaciones, booking ecommerce" />
+    <meta name="keywords" content="TravelPY, habitaciónes, reservas, Paraguay, hotel, paraguay reservas" />
 
     @yield('meta')
 
@@ -50,56 +47,25 @@
                     <!-- Nav Start -->
                     <div class="classynav">
                         <ul>
-                            <li><a href="#">Shop</a>
-                                <div class="megamenu">
-                                    <ul class="single-mega cn-col-4">
-                                        <li class="title">Women's Collection</li>
-                                        <li><a href="shop.html">Dresses</a></li>
-                                        <li><a href="shop.html">Blouses &amp; Shirts</a></li>
-                                        <li><a href="shop.html">T-shirts</a></li>
-                                        <li><a href="shop.html">Rompers</a></li>
-                                        <li><a href="shop.html">Bras &amp; Panties</a></li>
-                                    </ul>
-                                    <ul class="single-mega cn-col-4">
-                                        <li class="title">Men's Collection</li>
-                                        <li><a href="shop.html">T-Shirts</a></li>
-                                        <li><a href="shop.html">Polo</a></li>
-                                        <li><a href="shop.html">Shirts</a></li>
-                                        <li><a href="shop.html">Jackets</a></li>
-                                        <li><a href="shop.html">Trench</a></li>
-                                    </ul>
-                                    <ul class="single-mega cn-col-4">
-                                        <li class="title">Kid's Collection</li>
-                                        <li><a href="shop.html">Dresses</a></li>
-                                        <li><a href="shop.html">Shirts</a></li>
-                                        <li><a href="shop.html">T-shirts</a></li>
-                                        <li><a href="shop.html">Jackets</a></li>
-                                        <li><a href="shop.html">Trench</a></li>
-                                    </ul>
-                                    <div class="single-mega cn-col-4">
-                                        <img src="/img/bg-img/bg-6.jpg" alt="">
-                                    </div>
-                                </div>
-                            </li>
-                            <li><a href="#">Pages</a>
+                            <li><a href="{{route("index")}}">Inicio</a></li>
+                            <li><a href="{{route('shop')}}">Habitaciones</a>
                                 <ul class="dropdown">
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="shop.html">Shop</a></li>
-                                    <li><a href="single-product-details.html">Product Details</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="single-blog.html">Single Blog</a></li>
-                                    <li><a href="regular-page.html">Regular Page</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="{{route('shop')}}">Habitaciones</a></li>
+                                    <li><a href="{{ route('checkout') }}">Checkout</a></li>
                                 </ul>
                             </li>
-                            <li><a href="contact.html">Contacto</a></li>
-                            @if (session('user') !== null)
-                            <li><a href="{{ route('logout') }}">Cerrar Sesión</a></li>
-                            @else
-                            <li><a href="{{ route('register') }}">Registarse</a></li>
-                            <li><a href="{{ route('login') }}">Iniciar Sesión</a></li>
-                            @endif
+                            <li><a href="#">Perfil</a>
+                                <ul class="dropdown">
+                                    @if (session('user') !== null)
+                                    <li><a href="{{ route('profile') }}">Perfil</a></li>
+                                    <li><a href="{{ route('logout') }}">Cerrar Sesión</a></li>
+                                    @else
+                                    <li><a href="{{ route('login') }}">Iniciar Sesión</a></li>
+                                    <li><a href="{{ route('register') }}">Registarse</a></li>
+                                    @endif
+                                </ul>
+                            </li>
+                            <li><a href="#">Contacto</a></li>
                         </ul>
                     </div>
                     <!-- Nav End -->
@@ -110,14 +76,11 @@
             <div class="header-meta d-flex clearfix justify-content-end">
                 <!-- Search Area -->
                 <div class="search-area">
-                    <form action="#" method="post">
-                        <input type="search" name="search" id="headerSearch" placeholder="Type for search">
+                    <form action="{{route('search')}}" method="post">
+                        @csrf
+                        <input type="search" name="search" id="headerSearch" placeholder="Buscar">
                         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
-                </div>
-                <!-- Favourite Area -->
-                <div class="favourite-area">
-                    <a href="#"><img src="/img/core-img/heart.svg" alt=""></a>
                 </div>
                 <!-- User Login Info -->
                 @if (session('user') !== null)
@@ -153,15 +116,13 @@
             <!-- Cart Summary -->
             <div class="cart-amount-summary">
 
-                <h2>Summary</h2>
-                <ul class="summary-table">
-                    <li><span>subtotal:</span> <span>$274.00</span></li>
-                    <li><span>delivery:</span> <span>Free</span></li>
-                    <li><span>discount:</span> <span>-15%</span></li>
-                    <li><span>total:</span> <span>$232.00</span></li>
+                <h2>Resumen</h2>
+                <ul class="summary-table" id="summary-table">
+                    <li><span>subtotal:</span> <span>$0</span></li>
+                    <li><span>total:</span> <span>$0</span></li>
                 </ul>
                 <div class="checkout-btn mt-100">
-                    <a href="checkout.html" class="btn essence-btn">check out</a>
+                    <a href="{{route('checkout')}}" class="btn essence-btn">check out</a>
                 </div>
             </div>
         </div>
@@ -181,14 +142,14 @@
                     <div class="single_widget_area d-flex mb-30">
                         <!-- Logo -->
                         <div class="footer-logo mr-50">
-                            <a href="#"><img src="/img/core-img/logo2.png" alt=""></a>
+                            <a href="{{route("index")}}"><img src="/img/core-img/logo2.png" alt=""></a>
                         </div>
                         <!-- Footer Menu -->
                         <div class="footer_menu">
                             <ul>
-                                <li><a href="shop.html">Shop</a></li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="{{route("index")}}">Inicio</a></li>
+                                <li><a href="{{route("shop")}}">Habitaciones</a></li>
+                                <li><a href="#">Contacto</a></li>
                             </ul>
                         </div>
                     </div>
@@ -216,7 +177,7 @@
                             <h6>Subscribe</h6>
                         </div>
                         <div class="subscribtion_form">
-                            <form action="#" method="post">
+                            <form action="" method="">
                                 <input type="email" name="mail" class="mail" placeholder="Your email here">
                                 <button type="submit" class="submit"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
                             </form>
@@ -243,8 +204,7 @@
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         Copyright &copy;<script>
                             document.write(new Date().getFullYear());
-                        </script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </script> All rights reserved
                     </p>
                 </div>
             </div>

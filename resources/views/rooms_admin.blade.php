@@ -31,6 +31,15 @@
 
   <!-- Page Heading -->
   <h1 class="h3 mb-2 text-gray-800">Habitaciones</h1>
+  @if (session('error_')!==null)
+  <div class="col-md-12 mb-3">
+    <div class="alert alert-danger">
+      <ul>
+        <li>{{ session('error_') }}</li>
+      </ul>
+    </div>
+  </div>
+  @endif
   @if (session('success')!==null)
   <div class="col-md-12 mb-3">
     <div class="alert alert-success">
@@ -73,7 +82,7 @@
             <tr>
               <td>{{$result->id}}</td>
               <td>{{$result->title}}</td>
-              <td>${{$result->price}}</td>
+              <td>{{number_format($result->price,0,'','.')}}</td>
               <td>{{$result->name}}</td>
               <td><a href="{{route('rooms_admin.edit',[$result->id])}}">Editar</a></td>
               <td><a onclick="return message()" href="{{route('rooms_admin.destroy',[$result->id])}}">Eliminar</a></td>
